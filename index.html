@@ -1,741 +1,1102 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Letter for you</title>
 
-  <title>Birthday Letter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
 
-  <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
 
-  <link rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
 
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap"
-        rel="stylesheet">
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
 
-  <style>
-
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-
-      -webkit-tap-highlight-color:transparent;
-      -webkit-touch-callout:none;
-
-      -webkit-user-select:none;
-      user-select:none;
-    }
-
-    *::-webkit-scrollbar{
-      display:none;
-    }
-
-    html{
-      scrollbar-width:none;
-    }
-
-    body{
-      min-height:100vh;
-      overflow-x:hidden;
-      overflow-y:auto;
-
-      display:flex;
-      align-items:center;
-      justify-content:center;
-
-      font-family:'Cormorant Garamond', serif;
-
-      background:
-      radial-gradient(circle at top,
-      #2b0000 0%,
-      #080000 75%);
-    }
-
-    .container{
-      text-align:center;
-    }
-
-    h1{
-      color:white;
-
-      font-size:62px;
-      font-weight:500;
-
-      margin-bottom:20px;
-
-      letter-spacing:1px;
-    }
-
-    .sub{
-      color:#b8925f;
-
-      letter-spacing:4px;
-      font-size:15px;
-
-      margin-bottom:45px;
-
-      transition:0.4s ease;
-
-      font-family:'Inter', sans-serif;
-    }
-
-    @keyframes floating {
-
-      0%{
-        transform:translateY(0px);
+        -webkit-user-select: none;
+        user-select: none;
       }
 
-      50%{
-        transform:translateY(-10px);
+      *::-webkit-scrollbar {
+        display: none;
       }
 
-      100%{
-        transform:translateY(0px);
-      }
-    }
-
-    .envelope-wrapper{
-      width:430px;
-      height:270px;
-
-      position:relative;
-      margin:auto;
-
-      cursor:pointer;
-
-      perspective:1200px;
-
-      animation:floating 3s ease-in-out infinite;
-
-      touch-action:manipulation;
-    }
-
-    .envelope{
-      width:100%;
-      height:100%;
-
-      position:relative;
-      overflow:hidden;
-
-      border-radius:14px;
-
-      background:#ece4d7;
-
-      box-shadow:
-      0 20px 45px rgba(0,0,0,0.55);
-
-      transition:
-      box-shadow 0.15s linear,
-      transform 0.15s linear;
-    }
-
-    .envelope.holding{
-
-      box-shadow:
-
-      0 0 20px rgba(255,190,70,0.20),
-      0 0 40px rgba(255,190,70,0.25),
-      0 0 70px rgba(255,190,70,0.30),
-
-      0 20px 45px rgba(0,0,0,0.55);
-    }
-
-    .envelope::before{
-      content:"";
-
-      position:absolute;
-      inset:0;
-
-      background:#efe8dc;
-
-      clip-path:polygon(
-        0 100%,
-        0 35%,
-        50% 70%,
-        100% 35%,
-        100% 100%
-      );
-
-      z-index:1;
-    }
-
-    .flap{
-      position:absolute;
-
-      width:100%;
-      height:100%;
-
-      top:0;
-      left:0;
-
-      transform-origin:top;
-
-      transition:1.2s ease;
-
-      z-index:5;
-    }
-
-    .flap::before{
-      content:"";
-
-      position:absolute;
-      top:0;
-      left:0;
-
-      width:100%;
-      height:52%;
-
-      background:#e2dbcf;
-
-      clip-path:polygon(
-        0 0,
-        100% 0,
-        50% 100%
-      );
-
-      box-shadow:
-      inset 0 -8px 12px rgba(0,0,0,0.08);
-    }
-
-    .letter{
-      position:absolute;
-
-      width:88%;
-      height:84%;
-
-      left:6%;
-      bottom:-100%;
-
-      background:white;
-
-      border-radius:8px;
-
-      z-index:2;
-    }
-
-    .seal{
-      position:absolute;
-
-      width:95px;
-      height:95px;
-
-      border-radius:50%;
-
-      background:
-      radial-gradient(circle at top,
-      #ff3a3a,
-      #850000);
-
-      display:flex;
-      align-items:center;
-      justify-content:center;
-
-      left:50%;
-      top:50%;
-
-      transform:translate(-50%, -50%);
-
-      z-index:10;
-
-      box-shadow:
-      inset 0 4px 12px rgba(255,255,255,0.25),
-      0 6px 20px rgba(0,0,0,0.55);
-
-      transition:0.6s ease;
-    }
-
-    .seal span{
-      font-size:42px;
-      color:#500000;
-    }
-
-    .open .flap{
-      transform:rotateX(180deg);
-    }
-
-    .open .seal{
-      opacity:0;
-
-      transform:
-      translate(-50%, -50%)
-      scale(0);
-    }
-
-    @keyframes openEnvelope {
-
-      0%{
-        transform:scale(1) rotateX(0deg);
-        opacity:1;
+      html {
+        scrollbar-width: none;
       }
 
-      40%{
-        transform:scale(1.08) rotateX(-10deg);
+      body {
+        min-height: 100vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-family: "Cormorant Garamond", serif;
+
+        background: radial-gradient(circle at top, #2b0000 0%, #080000 75%);
       }
 
-      100%{
-        transform:scale(1.4) rotateX(-25deg);
-        opacity:0;
-      }
-    }
-
-    .animate-open{
-      animation:openEnvelope 1s ease forwards;
-    }
-
-    .progress-ring{
-      width:95px;
-      height:95px;
-
-      margin:50px auto 0;
-
-      position:relative;
-    }
-
-    svg{
-      transform:rotate(-90deg);
-    }
-
-    .progress-bg{
-      fill:none;
-
-      stroke:#2b1b1b;
-      stroke-width:8;
-    }
-
-    .progress{
-      fill:none;
-
-      stroke:#d9a441;
-      stroke-width:8;
-
-      stroke-linecap:round;
-
-      stroke-dasharray:251;
-      stroke-dashoffset:251;
-
-      transition:stroke-dashoffset 0.1s linear;
-    }
-
-    .percentage{
-      position:absolute;
-
-      top:50%;
-      left:50%;
-
-      transform:translate(-50%, -50%);
-
-      color:#d6a35f;
-      font-size:18px;
-
-      font-family:'Inter', sans-serif;
-    }
-
-    .message-screen{
-      width:100%;
-      min-height:100vh;
-      margin:30px auto;
-      overflow:auto;
-
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-
-      background:
-      radial-gradient(circle at top,
-      #2b0000 0%,
-      #080000 75%);
-    }
-
-    .card{
-      width:700px;
-      max-width:92%;
-
-      padding:34px 42px 28px;
-
-      border-radius:30px;
-
-      background:
-      linear-gradient(
-      145deg,
-      rgba(20,0,0,0.95),
-      rgba(10,0,0,0.92));
-
-      border:1px solid rgba(255,120,120,0.12);
-
-      color:white;
-
-      position:relative;
-
-      box-shadow:
-      0 20px 60px rgba(0,0,0,0.6);
-
-      animation:fadeUp 1s ease;
-    }
-
-    .card h2{
-      text-align:center;
-
-      font-size:38px;
-
-      margin-bottom:20px;
-
-      font-weight:500;
-
-      line-height:1.1;
-
-      letter-spacing:-0.5px;
-    }
-
-    .quote-top{
-      position:absolute;
-
-      top:18px;
-      left:22px;
-
-      font-size:42px;
-      line-height:1;
-
-      color:#a97a4c;
-
-      opacity:0.45;
-    }
-
-    .quote-bottom{
-      position:absolute;
-
-      bottom:6px;
-      right:18px;
-
-      font-size:42px;
-      line-height:1;
-
-      color:#a97a4c;
-
-      opacity:0.45;
-    }
-
-    .message-content{
-      position:relative;
-
-      padding:6px 0 8px;
-
-      line-height:1.3;
-    }
-
-    .to{
-      font-size:24px;
-
-      font-weight:500;
-
-      margin-bottom:30px;
-
-      position:relative;
-      z-index:2;
-    }
-
-    .to p{
-      margin-bottom:22px;
-    }
-
-    .to p:last-child{
-      margin-bottom:0;
-    }
-
-    .from{
-      text-align:right;
-
-      color:#a97a4c;
-
-      font-style:italic;
-
-      font-size:20px;
-
-      margin-bottom:0;
-
-      position:relative;
-      z-index:2;
-    }
-
-    .made-by{
-      margin-top:18px;
-      color:#a97a4c;
-      font-size:14px;
-      font-family:'Inter', sans-serif;
-      opacity:0.5;
-    }
-
-    .feel-section{
-      margin-top:34px;
-      margin-bottom:10px;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-    }
-
-    .reaction-title{
-      color:#8d6a47;
-      font-size:16px;
-      text-align:center;
-      letter-spacing:1.5px;
-    }
-
-    .reactions{
-      display:flex;
-      justify-content:center;
-
-      gap:18px;
-
-      margin-top:22px;
-    }
-
-    .reaction{
-      width:62px;
-      height:62px;
-
-      border-radius:50%;
-      border:none;
-
-      background:rgba(255,255,255,0.08);
-
-      font-size:28px;
-
-      cursor:pointer;
-
-      transition:0.3s ease;
-
-      backdrop-filter:blur(10px);
-    }
-
-    .reaction:hover{
-      transform:scale(1.08);
-
-      background:
-      rgba(255,255,255,0.15);
-    }
-
-    @keyframes fadeUp {
-
-      from{
-        opacity:0;
-        transform:translateY(50px);
+      .container {
+        text-align: center;
       }
 
-      to{
-        opacity:1;
-        transform:translateY(0);
-      }
-    }
+      h1 {
+        color: white;
 
-    @media(max-width:600px){
+        font-size: 62px;
+        font-weight: 500;
 
-      h1{
-        font-size:40px;
-      }
+        margin-bottom: 20px;
 
-      .envelope-wrapper{
-        width:290px;
-        height:190px;
+        letter-spacing: 1px;
       }
 
-      .seal{
-      width:80px;
-      height:80px;
+      .sub {
+        color: #b8925f;
+
+        letter-spacing: 2px;
+        font-size: 15px;
+
+        margin-right: 5px;
+        margin-left: 5px;
+        margin-bottom: 45px;
+
+        transition: 0.3s ease;
+
+        font-family: "Inter", sans-serif;
+
+        min-height: 20px;
       }
 
-      .card{
-        padding:28px;
+      @keyframes floating {
+        0% {
+          transform: translateY(0px);
+        }
+
+        50% {
+          transform: translateY(-10px);
+        }
+
+        100% {
+          transform: translateY(0px);
+        }
       }
 
-      .card h2{
-        font-size:25px;
+      .envelope-wrapper {
+        width: 430px;
+        height: 270px;
+
+        position: relative;
+        margin: auto;
+
+        cursor: pointer;
+
+        perspective: 1200px;
+
+        animation: floating 3s ease-in-out infinite;
+
+        touch-action: manipulation;
       }
 
-      .to{
-        font-size:20px;
+      .envelope {
+        width: 100%;
+        height: 100%;
+
+        position: relative;
+        overflow: hidden;
+
+        border-radius: 14px;
+
+        background: #ece4d7;
+
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55);
+
+        transition:
+          box-shadow 0.15s linear,
+          transform 0.15s linear;
       }
 
-      .from{
-        font-size:16px;
+      .envelope.holding {
+        box-shadow:
+          0 0 20px rgba(255, 190, 70, 0.2),
+          0 0 40px rgba(255, 190, 70, 0.25),
+          0 0 70px rgba(255, 190, 70, 0.3),
+          0 20px 45px rgba(0, 0, 0, 0.55);
       }
 
-      .quote-top,
-      .quote-bottom{
-        font-size:34px;
+      .envelope::before {
+        content: "";
+
+        position: absolute;
+        inset: 0;
+
+        background: #efe8dc;
+
+        clip-path: polygon(0 100%, 0 35%, 50% 70%, 100% 35%, 100% 100%);
+
+        z-index: 1;
       }
 
-      .reaction{
-        width:54px;
-        height:54px;
+      .flap {
+        position: absolute;
 
-        font-size:24px;
+        width: 100%;
+        height: 100%;
+
+        top: 0;
+        left: 0;
+
+        transform-origin: top;
+
+        transition: 1.2s ease;
+
+        z-index: 5;
       }
-    }
 
-  </style>
+      .flap::before {
+        content: "";
 
-</head>
+        position: absolute;
+        top: 0;
+        left: 0;
 
-<body>
+        width: 100%;
+        height: 52%;
 
-  <script>
+        background: #e2dbcf;
 
-    const birthdayMessage = `
+        clip-path: polygon(0 0, 100% 0, 50% 100%);
 
-      <p>Happy Birthday!</p>
+        box-shadow: inset 0 -8px 12px rgba(0, 0, 0, 0.08);
+      }
+
+      .letter {
+        position: absolute;
+
+        width: 88%;
+        height: 84%;
+
+        left: 6%;
+        bottom: -100%;
+
+        background: white;
+
+        border-radius: 8px;
+
+        z-index: 2;
+      }
+
+      .seal {
+        position: absolute;
+
+        width: 95px;
+        height: 95px;
+
+        border-radius: 50%;
+
+        background: radial-gradient(circle at top, #ff3a3a, #850000);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        left: 50%;
+        top: 50%;
+
+        transform: translate(-50%, -50%);
+
+        z-index: 10;
+
+        box-shadow:
+          inset 0 4px 12px rgba(255, 255, 255, 0.25),
+          0 6px 20px rgba(0, 0, 0, 0.55);
+
+        transition: 0.6s ease;
+      }
+
+      .seal span {
+        font-size: 42px;
+        color: #500000;
+      }
+
+      .open .flap {
+        transform: rotateX(180deg);
+      }
+
+      .open .seal {
+        opacity: 0;
+
+        transform: translate(-50%, -50%) scale(0);
+      }
+
+      @keyframes openEnvelope {
+        0% {
+          transform: scale(1) rotateX(0deg);
+          opacity: 1;
+        }
+
+        40% {
+          transform: scale(1.08) rotateX(-10deg);
+        }
+
+        100% {
+          transform: scale(1.4) rotateX(-25deg);
+          opacity: 0;
+        }
+      }
+
+      .animate-open {
+        animation: openEnvelope 1s ease forwards;
+      }
+
+      .progress-ring {
+        width: 95px;
+        height: 95px;
+
+        margin: 50px auto 0;
+
+        position: relative;
+      }
+
+      svg {
+        transform: rotate(-90deg);
+      }
+
+      .progress-bg {
+        fill: none;
+
+        stroke: #2b1b1b;
+        stroke-width: 8;
+      }
+
+      .progress {
+        fill: none;
+
+        stroke: #d9a441;
+        stroke-width: 8;
+
+        stroke-linecap: round;
+
+        stroke-dasharray: 251;
+        stroke-dashoffset: 251;
+
+        transition: stroke-dashoffset 0.1s linear;
+      }
+
+      .percentage {
+        position: absolute;
+
+        top: 50%;
+        left: 50%;
+
+        transform: translate(-50%, -50%);
+
+        color: #d6a35f;
+        font-size: 18px;
+
+        font-family: "Inter", sans-serif;
+      }
+
+      .message-screen {
+        width: 100%;
+        min-height: 100vh;
+        margin: 30px auto;
+        overflow: auto;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        background: radial-gradient(circle at top, #2b0000 0%, #080000 75%);
+      }
+
+      .card {
+        width: 700px;
+        max-width: 92%;
+        color: white;
+        position: relative;
+        animation: fadeUp 1s ease;
+
+        background: linear-gradient(180deg, #1a0909, #140707);
+        border: 1px solid rgba(188, 121, 70, 0.25);
+        border-radius: 18px;
+        padding: 28px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+        margin-bottom: 22px;
+        overflow: hidden;
+      }
+
+      .card h2 {
+        text-align: center;
+
+        font-size: 38px;
+
+        margin-bottom: 20px;
+
+        font-weight: 500;
+
+        line-height: 1.1;
+
+        letter-spacing: -0.5px;
+      }
+
+      .sendback {
+        width: 100%;
+        padding: 18px;
+        border: none;
+        border-radius: 14px;
+        background: #a92a2a;
+        color: #fff;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        font-weight: 100;
+      }
+      .sendback:hover {
+        background: #bb3232;
+      }
+
+      .card:before {
+        content: "";
+        position: absolute;
+        right: -50px;
+        top: -50px;
+        width: 140px;
+        height: 140px;
+        background: rgb(129 32 32 / 8%);
+        border-radius: 50%;
+      }
+
+      .quote-top {
+        position: absolute;
+
+        top: 18px;
+        left: 22px;
+
+        font-size: 42px;
+        line-height: 1;
+
+        color: #a97a4c;
+
+        opacity: 0.45;
+      }
+
+      .quote-bottom {
+        position: absolute;
+
+        bottom: 6px;
+        right: 18px;
+
+        font-size: 42px;
+        line-height: 1;
+
+        color: #a97a4c;
+
+        opacity: 0.45;
+      }
+
+      .message-content {
+        position: relative;
+
+        padding: 6px 0 8px;
+
+        line-height: 1.3;
+      }
+
+      .to {
+        font-size: 24px;
+
+        font-weight: 500;
+
+        margin-bottom: 30px;
+
+        position: relative;
+        z-index: 2;
+      }
+
+      .to p {
+        margin-bottom: 22px;
+      }
+
+      .to p:last-child {
+        margin-bottom: 0;
+      }
+
+      .from {
+        text-align: right;
+
+        color: #a97a4c;
+
+        font-style: italic;
+
+        font-size: 20px;
+
+        margin-bottom: 0;
+
+        position: relative;
+        z-index: 2;
+      }
+
+      .made-by {
+        margin-top: 18px;
+        color: #a97a4c;
+        font-size: 14px;
+        font-family: "Inter", sans-serif;
+        opacity: 0.5;
+      }
+
+      .feel-section {
+        margin-top: 34px;
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .reaction-title {
+        color: #8d6a47;
+        font-size: 16px;
+        text-align: center;
+        letter-spacing: 1.5px;
+      }
+
+      .reactions {
+        display: flex;
+        justify-content: center;
+
+        gap: 18px;
+
+        margin-top: 22px;
+      }
+
+      .reaction {
+        width: 62px;
+        height: 62px;
+
+        border-radius: 50%;
+        border: none;
+
+        background: rgba(255, 255, 255, 0.08);
+
+        font-size: 28px;
+
+        cursor: pointer;
+
+        transition: 0.3s ease;
+
+        backdrop-filter: blur(10px);
+      }
+
+      .reaction:hover {
+        transform: scale(1.08);
+
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 600px) {
+        h1 {
+          font-size: 40px;
+        }
+
+        .envelope-wrapper {
+          width: 290px;
+          height: 190px;
+        }
+
+        .seal {
+          width: 80px;
+          height: 80px;
+        }
+
+        .card {
+          padding: 28px;
+        }
+
+        .card h2 {
+          font-size: 27px;
+        }
+
+        .to {
+          font-size: 20px;
+        }
+
+        .from {
+          font-size: 16px;
+        }
+
+        .quote-top,
+        .quote-bottom {
+          font-size: 34px;
+        }
+
+        .reaction {
+          width: 54px;
+          height: 54px;
+
+          font-size: 24px;
+        }
+      }
+
+      .heart {
+        width: 72px;
+        height: 72px;
+        margin: auto;
+        border-radius: 50%;
+        background: radial-gradient(circle, #ef4545, #8d0000);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 34px;
+        box-shadow: 0 0 30px rgba(255, 0, 0, 0.35);
+        margin-bottom: 24px;
+      }
+
+      .sub {
+        color: #87664b;
+        margin-bottom: 28px;
+      }
+
+      /* DIGITAL BOUQUET */
+      .bouquet-section {
+        width: 700px;
+        max-width: 92%;
+        min-height: 560px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 30px;
+        background:
+          radial-gradient(
+            circle at 50% 20%,
+            rgba(133, 24, 24, 0.25),
+            transparent 45%
+          ),
+          linear-gradient(180deg, #1a0909, #100404);
+        border: 1px solid rgba(188, 121, 70, 0.25);
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+      }
+
+      .bouquet-intro {
+        text-align: center;
+        padding: 45px 25px;
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s ease;
+      }
+
+      .bouquet-intro.hide {
+        opacity: 0;
+        transform: translateY(-25px) scale(0.95);
+        pointer-events: none;
+      }
+
+      .tiny-heart {
+        width: 70px;
+        height: 70px;
+        margin: 0 auto 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        font-size: 34px;
+        color: #f1c9a5;
+        background: radial-gradient(circle, #b52b2b, #680000);
+        box-shadow:
+          0 0 20px rgba(255, 50, 50, 0.25),
+          0 0 50px rgba(255, 0, 0, 0.15);
+      }
+
+      .bouquet-intro h2 {
+        color: white;
+        font-size: 38px;
+        font-weight: 500;
+        margin-bottom: 18px;
+      }
+
+      .bouquet-intro p {
+        color: #a98360;
+        font-size: 20px;
+        line-height: 1.5;
+        margin-bottom: 30px;
+      }
+
+      .bouquet-button {
+        padding: 16px 25px;
+        border: 1px solid rgba(217, 164, 65, 0.35);
+        border-radius: 30px;
+        background: rgba(169, 42, 42, 0.3);
+        color: #f5dfc6;
+        font-family: "Inter", sans-serif;
+        font-size: 14px;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+        transition: 0.3s ease;
+      }
+
+      .bouquet-button:hover {
+        transform: translateY(-3px);
+        background: rgba(169, 42, 42, 0.55);
+        box-shadow: 0 10px 30px rgba(169, 42, 42, 0.25);
+      }
+
+      .digital-bouquet {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transform: scale(0.7);
+        pointer-events: none;
+        transition:
+          opacity 1s ease,
+          transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .digital-bouquet.show {
+        opacity: 1;
+        transform: scale(1);
+        pointer-events: auto;
+      }
+
+      .bouquet-glow {
+        position: absolute;
+        width: 350px;
+        height: 350px;
+        top: 10px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(205, 54, 54, 0.22),
+          transparent 70%
+        );
+        filter: blur(15px);
+        animation: bouquetGlow 3s ease-in-out infinite;
+      }
+
+      @keyframes bouquetGlow {
+        0%,
+        100% {
+          opacity: 0.5;
+          transform: scale(0.9);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.1);
+        }
+      }
+
+      .flowers {
+        width: 300px;
+        height: 210px;
+        position: relative;
+        z-index: 4;
+        transform: translateY(-65px);
+      }
+
+      .flower {
+        width: 75px;
+        height: 75px;
+        position: absolute;
+        transform: scale(0);
+      }
+
+      .digital-bouquet.show .flower {
+        animation: flowerBloom 0.8s ease forwards;
+      }
+
+      .digital-bouquet.show .flower-1 {
+        animation-delay: 0.2s;
+      }
+      .digital-bouquet.show .flower-2 {
+        animation-delay: 0.4s;
+      }
+      .digital-bouquet.show .flower-3 {
+        animation-delay: 0.6s;
+      }
+      .digital-bouquet.show .flower-4 {
+        animation-delay: 0.8s;
+      }
+      .digital-bouquet.show .flower-5 {
+        animation-delay: 1s;
+      }
+
+      @keyframes flowerBloom {
+        0% {
+          transform: scale(0) rotate(-20deg);
+        }
+        70% {
+          transform: scale(1.15) rotate(5deg);
+        }
+        100% {
+          transform: scale(1) rotate(0);
+        }
+      }
+
+      .flower-1 {
+        left: 20px;
+        top: 85px;
+      }
+      .flower-2 {
+        left: 65px;
+        top: 25px;
+      }
+      .flower-3 {
+        left: 115px;
+        top: 70px;
+      }
+      .flower-4 {
+        left: 165px;
+        top: 20px;
+      }
+      .flower-5 {
+        left: 210px;
+        top: 85px;
+      }
+
+      .petal {
+        width: 34px;
+        height: 42px;
+        position: absolute;
+        left: 20px;
+        top: 7px;
+        transform-origin: 17px 31px;
+        border-radius: 50% 50% 45% 45%;
+        background: linear-gradient(180deg, #ef7777, #a71f32);
+        box-shadow: inset 0 3px 5px rgba(255, 255, 255, 0.15);
+      }
+
+      .flower:nth-child(2) .petal,
+      .flower:nth-child(4) .petal {
+        background: linear-gradient(180deg, #f3b6a0, #c45862);
+      }
+
+      .flower:nth-child(3) .petal {
+        background: linear-gradient(180deg, #dba4c8, #8f416e);
+      }
+
+      .p1 {
+        transform: rotate(0deg) translateY(-13px);
+      }
+      .p2 {
+        transform: rotate(72deg) translateY(-13px);
+      }
+      .p3 {
+        transform: rotate(144deg) translateY(-13px);
+      }
+      .p4 {
+        transform: rotate(216deg) translateY(-13px);
+      }
+      .p5 {
+        transform: rotate(288deg) translateY(-13px);
+      }
+
+      .flower-center {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        left: 27px;
+        top: 27px;
+        z-index: 5;
+        border-radius: 50%;
+        background: radial-gradient(circle, #f4d27c, #b97825);
+        box-shadow: 0 0 10px rgba(244, 210, 124, 0.4);
+      }
+
+      .stems {
+        width: 190px;
+        height: 130px;
+        position: absolute;
+        top: 205px;
+        z-index: 2;
+      }
+
+      .stems span {
+        width: 3px;
+        height: 150px;
+        position: absolute;
+        left: 50%;
+        top: -30px;
+        background: linear-gradient(#527347, #243d24);
+        transform-origin: bottom;
+      }
+
+      .stems span:nth-child(1) {
+        transform: rotate(-25deg);
+      }
+      .stems span:nth-child(2) {
+        transform: rotate(-13deg);
+      }
+      .stems span:nth-child(3) {
+        transform: rotate(0);
+      }
+      .stems span:nth-child(4) {
+        transform: rotate(13deg);
+      }
+      .stems span:nth-child(5) {
+        transform: rotate(25deg);
+      }
+
+      .bouquet-wrap {
+        width: 210px;
+        height: 150px;
+        position: absolute;
+        top: 260px;
+        z-index: 3;
+      }
+
+      .wrap-left,
+      .wrap-right {
+        width: 130px;
+        height: 150px;
+        position: absolute;
+        top: 0;
+        background: linear-gradient(145deg, #d8b891, #8f6547);
+        box-shadow: inset 0 0 20px rgba(70, 30, 15, 0.2);
+      }
+
+      .wrap-left {
+        left: 4px;
+        clip-path: polygon(0 0, 100% 30%, 70% 100%);
+      }
+
+      .wrap-right {
+        right: 4px;
+        clip-path: polygon(100% 0, 0 30%, 30% 100%);
+      }
+
+      .ribbon {
+        width: 48px;
+        height: 48px;
+        position: absolute;
+        top: 340px;
+        z-index: 5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        color: #eac9a8;
+        font-size: 24px;
+        background: radial-gradient(circle, #b32d2d, #6f0000);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+      }
+
+      .bouquet-message {
+        position: absolute;
+        bottom: 18px;
+        z-index: 7;
+        text-align: center;
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 1s ease 1.5s,
+          transform 1s ease 1.5s;
+      }
+
+      .digital-bouquet.show .bouquet-message {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .bouquet-message h2 {
+        color: white;
+        font-size: 27px;
+        font-weight: 500;
+        margin-bottom: 7px;
+      }
+
+      .bouquet-message p {
+        color: #a98360;
+        font-size: 17px;
+        line-height: 1.3;
+        margin-bottom: 7px;
+      }
+
+      .bouquet-message span {
+        color: #c99364;
+        font-size: 16px;
+        font-style: italic;
+      }
+
+      @media (max-width: 600px) {
+        .bouquet-section {
+          min-height: 560px;
+        }
+
+        .bouquet-intro h2 {
+          font-size: 29px;
+        }
+
+        .bouquet-intro p {
+          font-size: 18px;
+        }
+
+        .digital-bouquet {
+          transform: scale(0.7);
+        }
+
+        .digital-bouquet.show {
+          transform: scale(0.9);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <script>
+      const birthdayMessage = `
+      <p>
+      I honestly don't know how to start a letter like this, 
+      but I just wanted to tell you that you're a really special person.
+      </p>
 
       <p>
-      I just wanted to take a moment to remind you how truly special you are. Life becomes so much brighter with a friend like you in it. Your kindness, laughter, strength, and the way you care for the people around you make you one of the most amazing people I know.
+      your smile, your kindness, your laughter, and 
+      the way you genuinely care about the people around you. 
+      You're always thoughtful, and that's something I really admire.
       </p>
 
-      <p>
-      Thank you for all the memories, conversations, support, and happiness you’ve brought into my life. Whether we’re laughing over silly things or helping each other through difficult days, every moment with you means a lot to me.
+      <p>The way you get irritated sometimes. Even when you're angry, 
+        you don't really say much.. you just stay quiet 😂 so funny.</p>
+
+        <p>The way you talk, the way you act, and your expressions have such an 
+            innocent and cheerful vibe. Sometimes you remind me of a little kid, 
+            and that's one of the things that makes you fun to be around.</p>
+
+        <p>I'm really glad I got to know you. I hope this year brings you lots of happiness, 
+            good health, amazing memories, and everything you've been wishing for.</p>
+
+      <p>You deserve nothing but happiness, success, love, and peace today and always. 
+        I hope this year brings you closer to your dreams and fills your life with
+         beautiful surprises. Never forget how valued and loved you are.
       </p>
 
-      <p>You deserve nothing but happiness, success, love, and peace today and always. I hope this year brings you closer to your dreams and fills your life with beautiful surprises. Never forget how valued and loved you are.
-      </p>
+      <p>Keep smiling, keep shining, and keep being the wonderful person you are. 
+        The world is lucky to have someone like you.</p>
 
-      <p>Keep smiling, keep shining, and keep being the wonderful person you are. The world is lucky to have someone like you.</p>
-
-      <p>Happy Birthday once again! May your day be as beautiful and unforgettable as you are.</p>
+      <p>Happy Birthday! May your day be as beautiful and unforgettable as you are.</p>
 
 
     `;
 
-    const fromMessage =
-      "— from Dhanush";
+      const fromMessage = "— from Dhanush";
+    </script>
 
-  </script>
+    <div class="container">
+      <h1>A Letter For You</h1>
 
-  <div class="container">
+      <div class="sub" id="subText">Hold to unseal</div>
 
-    <h1>
-      A Letter For You
-    </h1>
+      <div class="envelope-wrapper" id="wrapper">
+        <div class="envelope" id="envelope">
+          <div class="flap"></div>
 
-    <div class="sub" id="subText">
-      HOLD TO UNSEAL
-    </div>
+          <div class="letter"></div>
 
-    <div class="envelope-wrapper" id="wrapper">
-
-      <div class="envelope" id="envelope">
-
-        <div class="flap"></div>
-
-        <div class="letter"></div>
-
-        <div class="seal">
-          <span>♡</span>
+          <div class="seal">
+            <span>♡</span>
+          </div>
         </div>
-
       </div>
 
-    </div>
+      <div class="progress-ring">
+        <svg width="95" height="95">
+          <circle class="progress-bg" cx="47.5" cy="47.5" r="40"></circle>
 
-    <div class="progress-ring">
+          <circle class="progress" cx="47.5" cy="47.5" r="40"></circle>
+        </svg>
 
-      <svg width="95" height="95">
-
-        <circle
-          class="progress-bg"
-          cx="47.5"
-          cy="47.5"
-          r="40">
-        </circle>
-
-        <circle
-          class="progress"
-          cx="47.5"
-          cy="47.5"
-          r="40">
-        </circle>
-
-      </svg>
-
-      <div class="percentage" id="percent">
-        0%
+        <div class="percentage" id="percent">0%</div>
       </div>
-
     </div>
 
-  </div>
+    <script>
+      const wrapper = document.getElementById("wrapper");
 
-  <script>
+      const envelope = document.getElementById("envelope");
 
-    const wrapper =
-      document.getElementById("wrapper");
+      const progress = document.querySelector(".progress");
 
-    const envelope =
-      document.getElementById("envelope");
+      const percent = document.getElementById("percent");
 
-    const progress =
-      document.querySelector(".progress");
+      const subText = document.getElementById("subText");
 
-    const percent =
-      document.getElementById("percent");
+      const circumference = 251;
 
-    const subText =
-      document.getElementById("subText");
+      let progressValue = 0;
 
-    const circumference = 251;
+      let holdTimer;
+      function startHold() {
+        clearInterval(holdTimer);
 
-    let progressValue = 0;
+        progressValue = 0;
 
-    let holdTimer;
+        subText.innerText = "Almost there...";
 
-    function startHold(){
+        envelope.classList.add("holding");
 
-      progressValue = 0;
+        holdTimer = setInterval(() => {
+          progressValue++;
 
-      subText.innerText =
-        "ALMOST THERE...";
+          let maxProgress = 100;
 
-      envelope.classList.add("holding");
+          const glow = progressValue * 0.6;
 
-      holdTimer = setInterval(() => {
-
-        progressValue++;
-
-        const glow =
-          progressValue * 0.6;
-
-        envelope.style.boxShadow = `
+          envelope.style.boxShadow = `
           0 0 ${glow}px rgba(255,190,70,0.25),
           0 0 ${glow * 1.8}px rgba(255,190,70,0.30),
           0 0 ${glow * 3}px rgba(255,190,70,0.35),
           0 20px 45px rgba(0,0,0,0.55)
         `;
 
-        percent.innerText =
-          progressValue + "%";
+          percent.innerText = progressValue + "%";
 
-        progress.style.strokeDashoffset =
-          circumference -
-          (circumference * progressValue) / 100;
+          progress.style.strokeDashoffset =
+            circumference - (circumference * progressValue) / 100;
 
-        if(progressValue >= 100){
+          if (progressValue >= maxProgress) {
+            clearInterval(holdTimer);
 
-          clearInterval(holdTimer);
+            wrapper.classList.add("open");
 
-          wrapper.classList.add("open");
+            setTimeout(() => {
+              wrapper.classList.add("animate-open");
+            }, 400);
 
-          setTimeout(() => {
-
-            wrapper.classList.add("animate-open");
-
-          }, 400);
-
-          setTimeout(() => {
-
-            document.body.innerHTML = `
+            setTimeout(() => {
+              document.body.innerHTML = `
 
             <div class="message-screen">
 
@@ -763,38 +1124,99 @@
 
               </div>
 
-              <div class="feel-section">
 
-                <div class="reaction-title">
-                  how did this make you feel?
+              <div class="bouquet-section">
+
+                <div class="bouquet-intro" id="bouquetIntro">
+                  <div class="tiny-heart">♡</div>
+
+                  <h2>One more thing for you...</h2>
+
+                  <p>
+                    I couldn't give you flowers in person,<br>
+                    so I made you some instead.
+                  </p>
+
+                  <button class="bouquet-button" id="openBouquet">
+                    open ♡
+                  </button>
                 </div>
 
-                <div class="reactions">
+                <div class="digital-bouquet" id="digitalBouquet">
+                  <div class="bouquet-glow"></div>
 
-                  <button 
-                    class="reaction"
-                    data-reaction="❤️">
-                    ❤️
-                  </button>
+                  <div class="flowers">
+                    <div class="flower flower-1">
+                      <div class="petal p1"></div>
+                      <div class="petal p2"></div>
+                      <div class="petal p3"></div>
+                      <div class="petal p4"></div>
+                      <div class="petal p5"></div>
+                      <div class="flower-center"></div>
+                    </div>
 
-                  <button
-                    class="reaction"
-                    data-reaction="😍">
-                    😍
-                  </button>
+                    <div class="flower flower-2">
+                      <div class="petal p1"></div>
+                      <div class="petal p2"></div>
+                      <div class="petal p3"></div>
+                      <div class="petal p4"></div>
+                      <div class="petal p5"></div>
+                      <div class="flower-center"></div>
+                    </div>
 
-                  <button
-                    class="reaction"
-                    data-reaction="🥰">
-                    🥰
-                  </button>
+                    <div class="flower flower-3">
+                      <div class="petal p1"></div>
+                      <div class="petal p2"></div>
+                      <div class="petal p3"></div>
+                      <div class="petal p4"></div>
+                      <div class="petal p5"></div>
+                      <div class="flower-center"></div>
+                    </div>
 
-                  <button
-                    class="reaction"
-                    data-reaction="🥺">
-                    🥺
-                  </button>
+                    <div class="flower flower-4">
+                      <div class="petal p1"></div>
+                      <div class="petal p2"></div>
+                      <div class="petal p3"></div>
+                      <div class="petal p4"></div>
+                      <div class="petal p5"></div>
+                      <div class="flower-center"></div>
+                    </div>
 
+                    <div class="flower flower-5">
+                      <div class="petal p1"></div>
+                      <div class="petal p2"></div>
+                      <div class="petal p3"></div>
+                      <div class="petal p4"></div>
+                      <div class="petal p5"></div>
+                      <div class="flower-center"></div>
+                    </div>
+                  </div>
+
+                  <div class="stems">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+
+                  <div class="bouquet-wrap">
+                    <div class="wrap-left"></div>
+                    <div class="wrap-right"></div>
+                  </div>
+
+                  <div class="ribbon">♡</div>
+
+                  <div class="bouquet-message">
+                    <h2>These are for you ❤️</h2>
+
+                    <p>
+                      A little bouquet,<br>
+                      since I couldn't give you one in person.
+                    </p>
+
+                    <span>Happy Birthday, Sowmya</span>
+                  </div>
                 </div>
 
               </div>
@@ -807,100 +1229,65 @@
 
             `;
 
-            setTimeout(() => {
+              setTimeout(() => {
+                const openBouquet = document.getElementById("openBouquet");
+                const bouquetIntro = document.getElementById("bouquetIntro");
+                const digitalBouquet =
+                  document.getElementById("digitalBouquet");
 
-              const reactions =
-                document.querySelectorAll(".reaction");
+                openBouquet.addEventListener("click", () => {
+                  bouquetIntro.classList.add("hide");
 
-              reactions.forEach((button) => {
-
-                button.addEventListener("click", () => {
-
-                  const reaction =
-                    button.dataset.reaction;
-
-                  const phone =
-                    "919902256120";
-
-                  const text =
-                    encodeURIComponent(
-                      `${reaction}`
-                    );
-
-                  const url =
-                    `https://wa.me/${phone}?text=${text}`;
-
-                  window.open(url, "_blank");
-
+                  setTimeout(() => {
+                    digitalBouquet.classList.add("show");
+                  }, 500);
                 });
-
-              });
-
-            }, 100);
-
-          }, 1700);
-        }
-
-      }, 22);
-    }
-
-    function stopHold(){
-
-      clearInterval(holdTimer);
-
-      envelope.classList.remove("holding");
-
-      envelope.style.boxShadow =
-        "0 20px 45px rgba(0,0,0,0.55)";
-
-      if(progressValue < 100){
-
-        progressValue = 0;
-
-        percent.innerText = "0%";
-
-        subText.innerText =
-          "HOLD TO UNSEAL";
-
-        progress.style.strokeDashoffset =
-          circumference;
+              }, 100);
+            }, 1700);
+          }
+        }, 22);
       }
-    }
 
-    wrapper.addEventListener(
-      "mousedown",
-      startHold
-    );
+      function stopHold() {
+        clearInterval(holdTimer);
 
-    wrapper.addEventListener(
-      "mouseup",
-      stopHold
-    );
+        envelope.classList.remove("holding");
 
-    wrapper.addEventListener(
-      "mouseleave",
-      stopHold
-    );
+        envelope.style.boxShadow = "0 20px 45px rgba(0,0,0,0.55)";
 
-    wrapper.addEventListener(
-      "touchstart",
-      (e) => {
-        e.preventDefault();
-        startHold();
-      },
-      { passive:false }
-    );
+        if (progressValue < 100) {
+          progressValue = 0;
 
-    wrapper.addEventListener(
-      "touchend",
-      (e) => {
-        e.preventDefault();
-        stopHold();
-      },
-      { passive:false }
-    );
+          percent.innerText = "0%";
 
-  </script>
+          progress.style.strokeDashoffset = circumference;
+          subText.innerText = "Hold to unseal";
+        }
+      }
 
-</body>
+      wrapper.addEventListener("mousedown", startHold);
+
+      wrapper.addEventListener("mouseup", stopHold);
+
+      wrapper.addEventListener("mouseleave", stopHold);
+
+      wrapper.addEventListener(
+        "touchstart",
+        (e) => {
+          e.preventDefault();
+          startHold();
+        },
+        { passive: false },
+      );
+
+      wrapper.addEventListener(
+        "touchend",
+        (e) => {
+          e.preventDefault();
+          stopHold();
+        },
+        { passive: false },
+      );
+    </script>
+  </body>
 </html>
