@@ -165,7 +165,7 @@
 
       .envelope-button {
         position: relative;
-        width: min(300px, 80vw);
+        width: min(285px, 88vw);
         padding: 28px 0 0;
         border: 0;
         background: transparent;
@@ -191,6 +191,8 @@
           transform 0.3s ease;
       }
       .envelope {
+        margin-top: 20px;
+        height: 180px;
         position: relative;
         display: block;
         width: 100%;
@@ -357,32 +359,166 @@
         font-style: normal;
         margin-left: 3px;
       }
+      .garden-intro-note {
+        position: relative;
+        margin: 2px 0 17px !important;
+        padding: 15px 20px 16px;
+        border-top: 1px solid rgba(213, 183, 181, 0.48);
+        border-bottom: 1px solid rgba(213, 183, 181, 0.48);
+        color: #98727d !important;
+        font: italic 15px/1.75 var(--serif) !important;
+        letter-spacing: 0.005em;
+        text-align: center;
+      }
+      .garden-intro-note::before {
+        content: "✿";
+        display: block;
+        margin-bottom: 5px;
+        color: #d79bb0;
+        font: normal 14px/1 var(--sans);
+      }
       .garden-button {
-        border-radius: 5px;
-        width: 100%;
+        position: relative;
+        isolation: isolate;
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        padding: 15px 17px;
-        border: 1px solid #c9b79b;
-        background: #d8c6a5;
-        color: #4c4539;
-        font-size: 11px;
-        letter-spacing: 0.02em;
+        justify-content: center;
+        width: min(100%, 610px);
+        min-height: 66px;
+        margin: 28px auto 4px;
+        padding: 17px 62px 17px 58px;
+        overflow: hidden;
+        border: 1px solid rgba(195, 145, 159, 0.62);
+        border-radius: 999px;
+        color: #805966;
+        background: linear-gradient(
+          115deg,
+          #fffafa 0%,
+          #fbedf1 48%,
+          #f7edf0 100%
+        );
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.96),
+          inset 0 -1px 0 rgba(207, 165, 177, 0.12),
+          0 8px 22px rgba(164, 111, 130, 0.11);
+        font: italic 15px / 1.3 var(--serif);
+        letter-spacing: 0.018em;
         cursor: pointer;
         transition:
-          background 0.25s ease,
-          border-color 0.25s ease,
-          transform 0.25s ease;
+          transform 0.45s cubic-bezier(0.2, 0.75, 0.2, 1),
+          background 0.45s ease,
+          border-color 0.45s ease,
+          box-shadow 0.45s ease,
+          color 0.35s ease;
+        -webkit-tap-highlight-color: transparent;
+      }
+      ..garden-button::before {
+        content: "✿";
+        position: absolute;
+        left: 22px;
+        top: 50%;
+        transform: translateY(-51%) rotate(-9deg);
+        color: #c78da2;
+        font: normal 19px/1 var(--serif);
+        text-shadow: 0 1px 5px rgba(211, 157, 177, 0.18);
+        transition:
+          transform 0.5s cubic-bezier(0.2, 0.75, 0.2, 1),
+          color 0.35s ease;
+      }
+      .garden-button::after {
+        content: "";
+        position: absolute;
+        inset: 5px;
+        border: 1px solid rgba(255, 255, 255, 0.64);
+        border-radius: inherit;
+        pointer-events: none;
+      }
+      .garden-button > span:first-child {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+      }
+      .garden-button .button-arrow {
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        right: 13px;
+        display: grid;
+        place-items: center;
+        width: 37px;
+        height: 37px;
+        border: 1px solid rgba(201, 151, 166, 0.38);
+        border-radius: 50%;
+        color: #a66f83;
+        background: rgba(255, 255, 255, 0.68);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.9),
+          0 2px 7px rgba(158, 107, 126, 0.08);
+        font: normal 18px/1 var(--sans);
+        transform: translateY(-50%);
+        transition:
+          transform 0.45s cubic-bezier(0.2, 0.75, 0.2, 1),
+          background 0.35s ease,
+          color 0.35s ease;
       }
       .garden-button:hover {
-        background: #e4d5b9;
-        border-color: #bda77f;
-        transform: translateY(-2px);
+        color: #744b5b;
+        border-color: rgba(183, 123, 144, 0.78);
+        background: linear-gradient(
+          115deg,
+          #fff8fa 0%,
+          #f8e5ec 52%,
+          #f5e8ed 100%
+        );
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.98),
+          0 12px 27px rgba(164, 111, 130, 0.17),
+          0 0 0 4px rgba(220, 181, 194, 0.1);
+        transform: translateY(-3px);
       }
-      .button-arrow {
-        font-size: 17px;
-        line-height: 1;
+      .garden-button:hover::before {
+        color: #b96f8d;
+        transform: translateY(-51%) rotate(9deg) scale(1.12);
+      }
+      .garden-button:hover .button-arrow {
+        color: #fff;
+        background: #bd879b;
+        transform: translate(2px, -50%);
+      }
+      .garden-button:active {
+        transform: translateY(-1px) scale(0.992);
+        box-shadow:
+          inset 0 2px 5px rgba(150, 101, 119, 0.1),
+          0 4px 12px rgba(164, 111, 130, 0.1);
+      }
+      .garden-button:focus-visible {
+        outline: 3px solid rgba(183, 123, 144, 0.38);
+        outline-offset: 5px;
+      }
+      @media (max-width: 520px) {
+        .garden-button {
+          min-height: 62px;
+          margin-top: 23px;
+          padding-left: 48px;
+          padding-right: 57px;
+          font-size: 14px;
+        }
+        .garden-button::before {
+          left: 17px;
+          font-size: 17px;
+        }
+        .garden-button .button-arrow {
+          right: 11px;
+          width: 34px;
+          height: 34px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .garden-button,
+        .garden-button::before,
+        .garden-button .button-arrow {
+          transition: none !important;
+        }
       }
       .scene-footer {
         position: absolute;
@@ -581,7 +717,7 @@
           margin-bottom: 29px;
         }
         .envelope-button {
-          width: 300px;
+          width: 285px;
         }
         .letter-scene.is-open {
           justify-content: flex-start;
@@ -609,11 +745,8 @@
         .intro-copy h1 {
           font-size: clamp(30px, 9vw, 39px);
         }
-        .envelope {
-          height: 180px;
-        }
         .envelope-button {
-          width: min(300px, 80vw);
+          width: min(285px, 86vw);
         }
         .letter-scene.is-open {
           padding-top: 18px;
@@ -796,7 +929,6 @@
 
       body.in-garden .letter-scene {
         opacity: 0;
-        transform: scale(0.985);
         pointer-events: none;
         visibility: hidden;
         transition:
@@ -851,6 +983,11 @@
         }
         .letter-scene.show-letter .letter-message p {
           line-height: 1.9;
+        }
+        .letter-scene.show-letter .garden-intro-note {
+          padding: 13px 8px 14px;
+          font-size: 14px !important;
+          line-height: 1.7 !important;
         }
       }
       @media (prefers-reduced-motion: reduce) {
@@ -1013,7 +1150,7 @@
         transform-origin: 52% 63%;
         animation: bloom-nod 6.8s ease-in-out infinite;
       }
-      .plant-purple {
+      .plant-white {
         animation: plant-sway-left 9.2s ease-in-out infinite;
       }
       .plant-pink {
@@ -1188,7 +1325,7 @@
         width: 12px;
         height: 19px;
         border-radius: 100% 0 100% 0;
-        background: linear-gradient(145deg, #f7e4ff, #b78bdc 72%);
+        background: linear-gradient(145deg, #fffdfd, #edc9db 72%);
         box-shadow: inset 2px 1px 2px rgba(255, 255, 255, 0.3);
         opacity: 0;
         transform: rotate(28deg);
@@ -1427,7 +1564,7 @@
 
       /* Editorial stationery finish: soft paper fibres, layered folds and a rose wax seal. */
       .envelope-button {
-        width: min(300px, 80vw);
+        width: min(285px, 88vw);
         padding-top: 42px;
         isolation: isolate;
         transition:
@@ -1696,7 +1833,7 @@
       }
       @media (max-width: 520px) {
         .envelope-button {
-          width: min(300px, 80vw);
+          width: min(285px, 88vw);
           padding-top: 39px;
         }
         .envelope-seal {
@@ -1854,27 +1991,36 @@
           <div class="letter-topline">
             <span>TO SOMEONE SPECIAL</span><span>✳</span>
           </div>
-          <h2>Happy birthday <em>sowmya</em></h2>
+          <h2>Happy Birthday <em>sowmya</em></h2>
           <p>
-            I honestly don't know how to start a letter like this, 
-            but I just wanted to tell you that you're a really special person.<br>
-            your smile, your kindness, your laughter, and the way you genuinely 
-            care about the people around you. You're always thoughtful, and that's 
-            something I really admire.<br>
-            The way you get irritated sometimes. 
-            Even when you're angry, you don't really say much.. you just stay quiet 😂 so funny.<br>
-            The way you talk, the way you act, and your expressions have such an innocent and cheerful vibe. 
-            Sometimes you remind me of a little kid, and that's one of the things that makes you fun to be around.<br>
-            I'm really glad I got to know you. I hope this year brings you lots of happiness, 
-            good health, amazing memories, and everything you've been wishing for.<br>
-            You deserve nothing but happiness, success, love, and peace today and always. I hope this year brings you 
-            closer to your dreams and fills your life with beautiful surprises.<br>
-            Keep smiling, keep shining, and keep being the wonderful person you are. The world is lucky to have someone like you.<br>
-            Happy Birthday! May your day be as beautiful and unforgettable as you are.
+            I honestly don't know how to start a letter like this, but I just
+            wanted to tell you that you're a really special person.<br />
+            your smile, your kindness, your laughter, and the way you genuinely
+            care about the people around you. You're always thoughtful, and
+            that's something I really admire.<br />
+            The way you get irritated sometimes. Even when you're angry, you
+            don't really say much.. you just stay quiet 😂 so funny.<br />
+            The way you talk, the way you act, and your expressions have such an
+            innocent and cheerful vibe. Sometimes you remind me of a little kid,
+            and that's one of the things that makes you fun to be around.<br />
+            I'm really glad I got to know you. I hope this year brings you lots
+            of happiness, good health, amazing memories, and everything you've
+            been wishing for.<br />
+            You deserve nothing but happiness, success, love, and peace today
+            and always. I hope this year brings you closer to your dreams and
+            fills your life with beautiful surprises.<br />
+            Keep smiling, keep shining, and keep being the wonderful person you
+            are. The world is lucky to have someone like you.<br />
+            Happy Birthday! May your day be as beautiful and unforgettable as
+            you are.
           </p>
           <p class="letter-signoff">With warmth, <span>♡</span></p>
+          <p class="garden-intro-note">
+            Since you’re so fond of lilies, I made a little digital lily garden
+            just for you — one that will never fade.
+          </p>
           <button class="garden-button" id="gardenButton" type="button">
-            <span>Built a little garden for you</span
+            <span>Wander into the garden</span
             ><span class="button-arrow" aria-hidden="true">↗</span>
           </button>
         </article>
@@ -1915,10 +2061,10 @@
               <stop offset=".5" stop-color="#b7c47b" />
               <stop offset="1" stop-color="#607b54" />
             </linearGradient>
-            <linearGradient id="purplePetal" x1="0" y1="0" x2=".85" y2="1">
-              <stop offset="0" stop-color="#e0c9f7" />
-              <stop offset=".48" stop-color="#b28bdc" />
-              <stop offset="1" stop-color="#7752a8" />
+            <linearGradient id="whitePetal" x1="0" y1="0" x2=".85" y2="1">
+              <stop offset="0" stop-color="#fffefd" />
+              <stop offset=".48" stop-color="#fbf1f6" />
+              <stop offset="1" stop-color="#e8cbdc" />
             </linearGradient>
             <linearGradient id="pinkPetal" x1="0" y1="0" x2=".8" y2="1">
               <stop offset="0" stop-color="#ffe4f0" />
@@ -1930,34 +2076,34 @@
               <stop offset=".5" stop-color="#7c935d" />
               <stop offset="1" stop-color="#3c5b49" />
             </linearGradient>
-            <symbol id="lilyBloomPurple" viewBox="0 0 300 300">
-              <g stroke="#70458f" stroke-width="1.5" stroke-linejoin="round">
+            <symbol id="lilyBloomWhite" viewBox="0 0 300 300">
+              <g stroke="#d7afc3" stroke-width="1.5" stroke-linejoin="round">
                 <path
                   d="M149 167 C124 131 98 79 113 34 C123 4 149 1 164 31 C188 78 175 128 154 169 C153 174 151 173 149 167Z"
-                  fill="url(#purplePetal)"
+                  fill="url(#whitePetal)"
                 />
                 <path
                   d="M150 165 C109 150 51 118 32 80 C16 49 35 28 61 43 C105 68 137 120 157 163Z"
-                  fill="url(#purplePetal)"
+                  fill="url(#whitePetal)"
                 />
                 <path
                   d="M153 165 C169 118 210 64 248 54 C277 46 291 70 269 96 C241 130 195 153 154 171Z"
-                  fill="url(#purplePetal)"
+                  fill="url(#whitePetal)"
                 />
                 <path
                   d="M147 163 C104 158 53 163 24 191 C0 214 14 239 45 232 C91 221 131 185 153 168Z"
-                  fill="url(#purplePetal)"
+                  fill="url(#whitePetal)"
                 />
                 <path
                   d="M152 166 C195 151 250 154 279 178 C305 200 286 225 256 218 C212 210 174 185 151 169Z"
-                  fill="url(#purplePetal)"
+                  fill="url(#whitePetal)"
                 />
                 <path
                   d="M148 167 C127 206 125 242 147 277 C164 303 186 286 186 256 C188 216 170 183 153 164Z"
-                  fill="url(#purplePetal)"
+                  fill="url(#whitePetal)"
                 />
               </g>
-              <g fill="#60407e" opacity=".88">
+              <g fill="#d58eac" opacity=".62">
                 <path
                   d="M137 36 C128 49 129 66 139 85 C146 69 147 51 137 36Z"
                 />
@@ -1996,7 +2142,7 @@
                   transform="rotate(-50 99 151)"
                 />
               </g>
-              <g fill="none" stroke="#f3e2ff" stroke-width="1.5" opacity=".62">
+              <g fill="none" stroke="#ffffff" stroke-width="1.7" opacity=".88">
                 <path d="M151 161 C143 124 143 82 143 43" />
                 <path d="M151 164 C116 128 81 91 44 61" />
                 <path d="M153 164 C179 122 219 83 260 67" />
@@ -2042,7 +2188,7 @@
                   transform="rotate(55 202 151)"
                 />
               </g>
-              <circle cx="152" cy="168" r="12" fill="#76509d" />
+              <circle cx="152" cy="168" r="12" fill="#edc4d7" />
               <circle cx="152" cy="168" r="5.5" fill="#d8ac70" />
             </symbol>
             <symbol id="lilyBloomPink" viewBox="0 0 300 300">
@@ -2165,7 +2311,7 @@
 
         <div class="lily-meadow" aria-hidden="true">
           <svg
-            class="lily-plant plant-purple plant-left"
+            class="lily-plant plant-white plant-left"
             viewBox="0 0 300 780"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -2192,7 +2338,7 @@
             </g>
             <use
               class="bloom"
-              href="#lilyBloomPurple"
+              href="#lilyBloomWhite"
               x="5"
               y="-1"
               width="290"
@@ -2201,7 +2347,7 @@
           </svg>
 
           <svg
-            class="lily-plant plant-purple plant-left-mid"
+            class="lily-plant plant-white plant-left-mid"
             viewBox="0 0 300 780"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -2228,7 +2374,7 @@
             </g>
             <use
               class="bloom"
-              href="#lilyBloomPurple"
+              href="#lilyBloomWhite"
               x="18"
               y="-8"
               width="258"
@@ -2273,7 +2419,7 @@
           </svg>
 
           <svg
-            class="lily-plant plant-purple plant-right-mid"
+            class="lily-plant plant-white plant-right-mid"
             viewBox="0 0 300 780"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -2300,7 +2446,7 @@
             </g>
             <use
               class="bloom"
-              href="#lilyBloomPurple"
+              href="#lilyBloomWhite"
               x="-2"
               y="-5"
               width="300"
