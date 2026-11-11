@@ -3736,6 +3736,39 @@
         }, 3200);
       }
 
+      // Choose the next planting point from the widest available gap in the meadow.
+      // This spreads wishes across the garden instead of repeatedly clustering them
+      // around the same random middle band.
+      function getNextWishPlantPosition() {
+        const meadowWidth = lilyMeadow.clientWidth || window.innerWidth || 1;
+        const plantWidth = 184;
+        const edgeMargin = Math.min(36, ((plantWidth / 2) + 8) / meadowWidth * 100);
+        const minLeft = Math.max(5, edgeMargin);
+        const maxLeft = Math.min(95, 100 - edgeMargin);
+        const existing = Array.from(lilyMeadow.querySelectorAll('.garden-wish-growth'))
+          .map((plant) => {
+            const value = Number.parseFloat(plant.dataset.wishPosition || plant.style.getPropertyValue('--wish-left'));
+            return Number.isFinite(value) ? (value / 100) * meadowWidth : null;
+          })
+          .filter((value) => value !== null);
+
+        // With no plants yet, start at a varied point. Later plants occupy the
+        // position furthest from all existing wishes, filling the largest gap.
+        if (!existing.length) {
+          return minLeft + Math.random() * (maxLeft - minLeft);
+        }
+
+        const candidates = [];
+        for (let left = minLeft; left <= maxLeft; left += 0.8) {
+          const x = (left / 100) * meadowWidth;
+          const nearest = Math.min(...existing.map((placedX) => Math.abs(x - placedX)));
+          candidates.push({ left, nearest });
+        }
+        const bestDistance = Math.max(...candidates.map((candidate) => candidate.nearest));
+        const bestCandidates = candidates.filter((candidate) => candidate.nearest >= bestDistance - 5);
+        return bestCandidates[Math.floor(Math.random() * bestCandidates.length)].left;
+      }
+
       function plantWish() {
         if (wishIsPlanting) return;
         if (!wishInput || !wishFeedback || !plantWishButton || !wishGrowth || !gardenScene || !lilyMeadow) {
@@ -3769,10 +3802,11 @@
         gardenPlant.classList.add("garden-wish-growth");
         gardenPlant.classList.remove("wish-growth-template", "is-animating");
         gardenPlant.dataset.wish = wish;
-        const left = 25 + Math.random() * 50;
+        const left = getNextWishPlantPosition();
+        gardenPlant.dataset.wishPosition = left.toFixed(2);
         // The base is fixed to the meadow floor. Grass layers sit in front of
         // the roots, so the stem looks like it grows out of the garden itself.
-        gardenPlant.style.setProperty("--wish-left", `${left.toFixed(1)}%`);
+        gardenPlant.style.setProperty("--wish-left", `${left.toFixed(2)}%`);
         gardenPlant.style.setProperty("--wish-bottom", "0px");
         lilyMeadow.appendChild(gardenPlant);
         void gardenPlant.offsetWidth;
