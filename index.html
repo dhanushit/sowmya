@@ -2307,6 +2307,244 @@
       }
       .wish-panel input:focus { border-color: #c78fa4; box-shadow: 0 0 0 3px rgba(199,143,164,.14); }
       .wish-feedback { min-height: 18px; margin: 9px 0 0; color: #a36f82; font: italic 12px/1.45 var(--serif); }
+      /* A wish becomes a tiny seed, takes root, then opens into a lily. */
+      .wish-growth {
+        position: relative;
+        width: 100%;
+        height: 148px;
+        margin-top: 14px;
+        overflow: hidden;
+        border: 1px solid rgba(174, 194, 160, .38);
+        border-radius: 12px;
+        background:
+          radial-gradient(ellipse at 50% 12%, rgba(255,255,255,.78), transparent 58%),
+          linear-gradient(180deg, #f7fbf2 0%, #eff6e9 68%, #e7efdd 100%);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.82);
+        isolation: isolate;
+      }
+      .wish-growth[hidden] { display: none !important; }
+      .wish-growth::before,
+      .wish-growth::after {
+        content: "";
+        position: absolute;
+        pointer-events: none;
+      }
+      .wish-growth::before {
+        width: 82px;
+        height: 82px;
+        top: -42px;
+        left: calc(50% - 41px);
+        border-radius: 50%;
+        background: rgba(255,255,255,.42);
+        filter: blur(7px);
+      }
+      .wish-growth::after {
+        left: 10%;
+        right: 10%;
+        bottom: 13px;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(112,139,94,.24), transparent);
+      }
+      .wish-growth-ground {
+        position: absolute;
+        z-index: 3;
+        left: 50%;
+        bottom: 14px;
+        width: 162px;
+        height: 25px;
+        transform: translateX(-50%);
+        border-radius: 50%;
+        background: radial-gradient(ellipse at 50% 28%, #ad8a68 0%, #8d6b50 53%, #75543f 100%);
+        box-shadow: 0 5px 8px rgba(82, 79, 55, .13);
+      }
+      .wish-growth-ground::before {
+        content: "";
+        position: absolute;
+        left: 18px;
+        right: 18px;
+        top: -5px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(176, 144, 108, .8);
+      }
+      .wish-growth-seed {
+        position: absolute;
+        z-index: 5;
+        top: 9px;
+        left: 50%;
+        width: 12px;
+        height: 17px;
+        border-radius: 58% 42% 58% 42%;
+        opacity: 0;
+        background: linear-gradient(145deg, #b38a5c 0%, #765137 58%, #4d382b 100%);
+        box-shadow: inset 2px 1px 2px rgba(255,255,255,.28), 0 2px 4px rgba(63,48,35,.2);
+        transform: translateX(-50%) rotate(-24deg);
+      }
+      .wish-growth-dirt {
+        position: absolute;
+        z-index: 6;
+        left: 50%;
+        bottom: 32px;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        opacity: 0;
+        background: #9a7657;
+      }
+      .wish-growth-dirt-one { --dirt-x: -23px; --dirt-y: -12px; }
+      .wish-growth-dirt-two { --dirt-x: 19px; --dirt-y: -15px; width: 4px; height: 4px; }
+      .wish-growth-dirt-three { --dirt-x: 7px; --dirt-y: -21px; width: 3px; height: 3px; }
+      .wish-growth-stem {
+        position: absolute;
+        z-index: 4;
+        left: 50%;
+        bottom: 27px;
+        width: 4px;
+        height: 67px;
+        border-radius: 99px;
+        background: linear-gradient(90deg, #587c50, #8eaa6a 54%, #4d7549);
+        opacity: .98;
+        transform: translateX(-50%) scaleY(0);
+        transform-origin: 50% 100%;
+      }
+      .wish-growth-leaf {
+        position: absolute;
+        z-index: 5;
+        bottom: 61px;
+        width: 26px;
+        height: 15px;
+        opacity: 0;
+        background: linear-gradient(135deg, #b5c98a, #668a57 76%);
+        border: 1px solid rgba(73,111,66,.3);
+      }
+      .wish-growth-leaf-left {
+        left: calc(50% - 25px);
+        border-radius: 100% 0 100% 0;
+        transform: rotate(-31deg) scale(.05);
+        transform-origin: 100% 100%;
+      }
+      .wish-growth-leaf-right {
+        left: calc(50% - 1px);
+        border-radius: 0 100% 0 100%;
+        transform: rotate(29deg) scale(.05);
+        transform-origin: 0 100%;
+      }
+      .wish-growth-bloom {
+        position: absolute;
+        z-index: 7;
+        left: 50%;
+        bottom: 70px;
+        width: 62px;
+        height: 62px;
+        opacity: 0;
+        transform: translateX(-50%) scale(.25);
+        transform-origin: 50% 70%;
+        filter: drop-shadow(0 3px 5px rgba(183,119,151,.2));
+      }
+      .wish-growth-bloom i {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 18px;
+        height: 29px;
+        border: 1px solid rgba(208,151,177,.45);
+        border-radius: 78% 22% 72% 28%;
+        background: linear-gradient(155deg, #fffefe 4%, #f9dce8 66%, #e9b5ce 100%);
+        opacity: 0;
+        transform: translate(-50%, -100%) rotate(var(--petal-angle)) translateY(-7px) scale(.08);
+        transform-origin: 50% 100%;
+      }
+      .wish-growth-bloom i:nth-child(1) { --petal-angle: 0deg; }
+      .wish-growth-bloom i:nth-child(2) { --petal-angle: 60deg; }
+      .wish-growth-bloom i:nth-child(3) { --petal-angle: 120deg; }
+      .wish-growth-bloom i:nth-child(4) { --petal-angle: 180deg; }
+      .wish-growth-bloom i:nth-child(5) { --petal-angle: 240deg; }
+      .wish-growth-bloom i:nth-child(6) { --petal-angle: 300deg; }
+      .wish-growth-center {
+        position: absolute;
+        z-index: 2;
+        left: 50%;
+        top: 50%;
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        opacity: 0;
+        background: radial-gradient(circle at 35% 30%, #fff6c9, #d8b86e 72%);
+        box-shadow: 0 0 8px rgba(246,220,146,.55);
+        transform: translate(-50%, -50%) scale(.2);
+      }
+      .wish-growth.is-animating .wish-growth-seed {
+        animation: wish-seed-drop 1.15s cubic-bezier(.22,.72,.24,1) .12s forwards;
+      }
+      .wish-growth.is-animating .wish-growth-dirt-one {
+        animation: wish-soil-flick .55s ease-out 1.05s forwards;
+      }
+      .wish-growth.is-animating .wish-growth-dirt-two {
+        animation: wish-soil-flick .58s ease-out 1.08s forwards;
+      }
+      .wish-growth.is-animating .wish-growth-dirt-three {
+        animation: wish-soil-flick .52s ease-out 1.1s forwards;
+      }
+      .wish-growth.is-animating .wish-growth-stem {
+        animation: wish-stem-grow 1.05s cubic-bezier(.2,.8,.2,1) 1.62s forwards;
+      }
+      .wish-growth.is-animating .wish-growth-leaf-left {
+        animation: wish-leaf-unfurl .65s cubic-bezier(.2,.8,.2,1) 2.46s forwards;
+      }
+      .wish-growth.is-animating .wish-growth-leaf-right {
+        animation: wish-leaf-unfurl .65s cubic-bezier(.2,.8,.2,1) 2.7s forwards;
+      }
+      .wish-growth.is-animating .wish-growth-bloom {
+        animation: wish-bloom-rise .6s cubic-bezier(.18,.8,.2,1) 3.16s forwards;
+      }
+      .wish-growth.is-animating .wish-growth-bloom i {
+        animation: wish-petal-open .75s cubic-bezier(.18,.8,.2,1) 3.47s forwards;
+      }
+      .wish-growth.is-animating .wish-growth-center {
+        animation: wish-center-glow .48s ease-out 4.02s forwards;
+      }
+      @keyframes wish-seed-drop {
+        0% { opacity: 0; transform: translate(-50%,-8px) rotate(-24deg) scale(.68); }
+        12% { opacity: 1; }
+        72% { opacity: 1; transform: translate(calc(-50% + 8px), 86px) rotate(33deg) scale(1); }
+        88%, 100% { opacity: 0; transform: translate(-50%, 98px) rotate(48deg) scale(.58); }
+      }
+      @keyframes wish-soil-flick {
+        0% { opacity: 0; transform: translate(-50%,0) scale(.5); }
+        30% { opacity: .9; }
+        100% { opacity: 0; transform: translate(calc(-50% + var(--dirt-x)), var(--dirt-y)) scale(.35); }
+      }
+      @keyframes wish-stem-grow {
+        from { transform: translateX(-50%) scaleY(0); }
+        to { transform: translateX(-50%) scaleY(1); }
+      }
+      @keyframes wish-leaf-unfurl {
+        from { opacity: 0; }
+        to { opacity: 1; transform: rotate(var(--leaf-angle, -28deg)) scale(1); }
+      }
+      .wish-growth-leaf-left { --leaf-angle: -31deg; }
+      .wish-growth-leaf-right { --leaf-angle: 29deg; }
+      @keyframes wish-bloom-rise {
+        from { opacity: 0; transform: translateX(-50%) translateY(9px) scale(.25); }
+        to { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+      }
+      @keyframes wish-petal-open {
+        from { opacity: 0; transform: translate(-50%, -100%) rotate(var(--petal-angle)) translateY(-7px) scale(.08); }
+        to { opacity: 1; transform: translate(-50%, -100%) rotate(var(--petal-angle)) translateY(-7px) scale(1); }
+      }
+      @keyframes wish-center-glow {
+        from { opacity: 0; transform: translate(-50%, -50%) scale(.2); }
+        to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+      }
+      .garden-scene.night-theme .wish-growth:not(.garden-wish-growth) {
+        border-color: rgba(214,190,207,.28);
+        background: linear-gradient(180deg, #e3edf0 0%, #dce9df 68%, #d3e0d3 100%);
+      }
+      @media (max-width: 420px) {
+        .wish-growth { height: 138px; }
+        .wish-growth-ground { width: 142px; }
+      }
+
       .wish-submit:disabled { opacity: .72; cursor: default; }
       .wish-submit {
         display: block;
@@ -2423,6 +2661,152 @@
         }
       }
 
+
+      /* A wish is planted in the meadow itself, not inside the wish card. */
+      .wish-growth.garden-wish-growth {
+        position: absolute;
+        /* Keep the new lily in the meadow's stacking context so foreground grass
+           naturally overlaps its roots and hides the planting base. */
+        z-index: 2;
+        left: var(--wish-left, 50%);
+        bottom: var(--wish-bottom, 0px);
+        width: 184px;
+        height: 232px;
+        margin: 0;
+        overflow: visible;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+        transform: translateX(-50%);
+        isolation: isolate;
+        pointer-events: none;
+      }
+      .wish-growth.garden-wish-growth::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 34px;
+        width: 128px;
+        height: 128px;
+        transform: translateX(-50%);
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(255,255,245,.34), rgba(255,255,255,0) 70%);
+        filter: blur(4px);
+      }
+      .wish-growth.garden-wish-growth::after { display: none; }
+      .garden-wish-growth .wish-growth-ground {
+        z-index: 3;
+        left: 50%;
+        bottom: 5px;
+        width: 84px;
+        height: 13px;
+        opacity: 0;
+        border-radius: 50%;
+        /* A soft root shadow instead of a detached brown soil island. */
+        background: radial-gradient(ellipse at 50% 45%, rgba(91,111,65,.34) 0%, rgba(130,143,91,.2) 48%, rgba(130,143,91,0) 76%);
+        box-shadow: none;
+        filter: blur(1.5px);
+        animation: wish-ground-appear .65s ease-out .72s forwards;
+      }
+      .garden-wish-growth .wish-growth-ground::before {
+        left: 25px;
+        right: 25px;
+        top: -1px;
+        height: 4px;
+        background: rgba(157,174,112,.28);
+        filter: blur(1px);
+      }
+      .garden-wish-growth .wish-growth-seed {
+        z-index: 8;
+        top: 4px;
+        width: 12px;
+        height: 17px;
+      }
+      .garden-wish-growth .wish-growth-dirt {
+        z-index: 9;
+        bottom: 39px;
+      }
+      .garden-wish-growth .wish-growth-stem {
+        z-index: 4;
+        bottom: 8px;
+        width: 4px;
+        height: 108px;
+      }
+      .garden-wish-growth .wish-growth-leaf {
+        z-index: 5;
+        bottom: 66px;
+        width: 29px;
+        height: 16px;
+      }
+      .garden-wish-growth .wish-growth-bloom {
+        z-index: 7;
+        bottom: 108px;
+        width: 68px;
+        height: 68px;
+      }
+      .garden-wish-growth .wish-growth-bloom i {
+        width: 20px;
+        height: 32px;
+      }
+      .garden-wish-growth.is-animating .wish-growth-ground {
+        animation: wish-ground-appear .65s ease-out .72s forwards;
+      }
+      @keyframes wish-ground-appear {
+        0% { opacity: 0; transform: translateX(-50%) scaleX(.45) scaleY(.7); }
+        100% { opacity: 1; transform: translateX(-50%) scaleX(1) scaleY(1); }
+      }
+      @keyframes wish-seed-drop {
+        0% { opacity: 0; transform: translate(-50%,-8px) rotate(-24deg) scale(.68); }
+        12% { opacity: 1; }
+        72% { opacity: 1; transform: translate(calc(-50% + 8px), 184px) rotate(33deg) scale(1); }
+        88%, 100% { opacity: 0; transform: translate(-50%, 208px) rotate(48deg) scale(.58); }
+      }
+      .wish-garden-toast {
+        position: absolute;
+        z-index: 15;
+        left: 50%;
+        bottom: max(76px, calc(env(safe-area-inset-bottom) + 68px));
+        width: max-content;
+        max-width: min(88vw, 390px);
+        padding: 11px 17px;
+        border: 1px solid rgba(224,196,205,.72);
+        border-radius: 999px;
+        color: #845f70;
+        background: rgba(255,250,249,.9);
+        box-shadow: 0 9px 28px rgba(70,76,73,.14);
+        backdrop-filter: blur(12px);
+        font: italic 13px/1.45 var(--serif);
+        text-align: center;
+        opacity: 0;
+        pointer-events: none;
+        transform: translate(-50%, 12px);
+      }
+      .wish-garden-toast.is-visible { animation: wish-toast-show .45s ease-out both; }
+      .garden-scene.night-theme .wish-garden-toast {
+        color: #f2dce6;
+        background: rgba(31,49,65,.9);
+        border-color: rgba(226,190,207,.4);
+      }
+      @keyframes wish-toast-show {
+        from { opacity: 0; transform: translate(-50%, 12px); }
+        to { opacity: 1; transform: translate(-50%, 0); }
+      }
+      @media (max-width: 520px) {
+        .wish-growth.garden-wish-growth {
+          width: 156px;
+          height: 232px;
+        }
+        .garden-wish-growth .wish-growth-ground { bottom: 5px; width: 76px; height: 12px; }
+        .garden-wish-growth .wish-growth-stem { bottom: 8px; height: 94px; }
+        .garden-wish-growth .wish-growth-leaf { bottom: 58px; }
+        .garden-wish-growth .wish-growth-bloom { bottom: 94px; width: 60px; height: 60px; }
+        .wish-garden-toast { bottom: max(72px, calc(env(safe-area-inset-bottom) + 64px)); font-size: 12px; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .garden-wish-growth .wish-growth-ground { opacity: 1; animation: none !important; }
+        .wish-garden-toast.is-visible { animation: none !important; opacity: 1; transform: translate(-50%, 0); }
+      }
     </style>
   </head>
   <body>
@@ -2564,6 +2948,23 @@
           <p class="wish-feedback" id="wishFeedback" aria-live="polite"></p>
           <button class="wish-submit" id="plantWishButton" type="button">Plant my wish <span aria-hidden="true">✿</span></button>
         </form>
+
+        <!-- Hidden reusable seedling template. Each wish creates a new plant directly in the meadow. -->
+        <div class="wish-growth wish-growth-template" id="wishGrowth" hidden aria-hidden="true">
+          <span class="wish-growth-seed"></span>
+          <span class="wish-growth-dirt wish-growth-dirt-one"></span>
+          <span class="wish-growth-dirt wish-growth-dirt-two"></span>
+          <span class="wish-growth-dirt wish-growth-dirt-three"></span>
+          <div class="wish-growth-ground"></div>
+          <span class="wish-growth-stem"></span>
+          <span class="wish-growth-leaf wish-growth-leaf-left"></span>
+          <span class="wish-growth-leaf wish-growth-leaf-right"></span>
+          <div class="wish-growth-bloom">
+            <i></i><i></i><i></i><i></i><i></i><i></i>
+            <span class="wish-growth-center"></span>
+          </div>
+        </div>
+        <div class="wish-garden-toast" id="wishGardenToast" role="status" aria-live="polite"></div>
 
         <button class="butterfly-companion" id="butterflyCompanion" type="button" aria-label="A little butterfly companion" aria-expanded="false" aria-controls="butterflyWhisper">
           <svg viewBox="0 0 90 70" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
@@ -3280,6 +3681,8 @@
       const wishInput = document.getElementById("wishInput");
       const wishFeedback = document.getElementById("wishFeedback");
       const plantWishButton = document.getElementById("plantWishButton");
+      const wishGrowth = document.getElementById("wishGrowth");
+      const wishGardenToast = document.getElementById("wishGardenToast");
       const butterflyCompanion = document.getElementById("butterflyCompanion");
       const butterflyWhisper = document.getElementById("butterflyWhisper");
 
@@ -3292,7 +3695,7 @@
       });
 
       function openWishPanel() {
-        if (!wishPanel || !wishInput || !wishOpenButton) return;
+        if (!wishPanel || !wishInput || !wishOpenButton || wishIsPlanting) return;
         wishPanel.hidden = false;
         gardenScene.classList.add("wish-open");
         wishOpenButton.setAttribute("aria-expanded", "true");
@@ -3313,38 +3716,86 @@
 
       wishOpenButton.addEventListener("click", openWishPanel);
       wishClose.addEventListener("click", () => closeWishPanel());
+      let wishPlantTimer = null;
+      let wishToastTimer = null;
+      let wishIsPlanting = false;
+
       wishInput.addEventListener("input", () => {
         if (wishFeedback) wishFeedback.textContent = "";
-        if (plantWishButton.disabled) {
-          plantWishButton.disabled = false;
-          plantWishButton.innerHTML = 'Plant my wish <span aria-hidden="true">✿</span>';
-          if (wishResetTimer) window.clearTimeout(wishResetTimer);
-        }
       });
 
-      let wishResetTimer = null;
+      function showWishGardenToast(message) {
+        if (!wishGardenToast) return;
+        wishGardenToast.textContent = message;
+        wishGardenToast.classList.remove("is-visible");
+        void wishGardenToast.offsetWidth;
+        wishGardenToast.classList.add("is-visible");
+        if (wishToastTimer) window.clearTimeout(wishToastTimer);
+        wishToastTimer = window.setTimeout(() => {
+          wishGardenToast.classList.remove("is-visible");
+        }, 3200);
+      }
+
       function plantWish() {
+        if (wishIsPlanting) return;
+        if (!wishInput || !wishFeedback || !plantWishButton || !wishGrowth || !gardenScene || !lilyMeadow) {
+          console.error("The wish planting controls could not be initialized.");
+          return;
+        }
         const wish = wishInput.value.trim();
         if (!wish) {
           wishFeedback.textContent = "Write a little wish before planting it. ♡";
           return;
         }
 
-        // Keep the confirmation inside the popup: no floating text cards are created.
-        wishFeedback.textContent = `“${wish}” is planted in your garden. May it bloom beautifully. ♡`;
-        wishInput.value = "";
+        wishIsPlanting = true;
+        wishInput.blur();
+        wishInput.disabled = true;
         plantWishButton.disabled = true;
-        plantWishButton.innerHTML = 'Wish planted <span aria-hidden="true">✿</span>';
-        showerLilies(null);
+        plantWishButton.innerHTML = 'Planting… <span aria-hidden="true">✿</span>';
+        wishOpenButton.disabled = true;
+        // Clear only the active planting timer before starting a new wish.
+        if (wishPlantTimer) window.clearTimeout(wishPlantTimer);
 
-        if (wishResetTimer) window.clearTimeout(wishResetTimer);
-        wishResetTimer = window.setTimeout(() => {
+        // Close the wish card first. The seedling animation is created as a
+        // separate garden element so the seed visibly lands in the meadow.
+        closeWishPanel(false);
+
+        const gardenPlant = wishGrowth.cloneNode(true);
+        gardenPlant.removeAttribute("id");
+        gardenPlant.removeAttribute("hidden");
+        gardenPlant.hidden = false;
+        gardenPlant.setAttribute("aria-hidden", "true");
+        gardenPlant.classList.add("garden-wish-growth");
+        gardenPlant.classList.remove("wish-growth-template", "is-animating");
+        gardenPlant.dataset.wish = wish;
+        const left = 25 + Math.random() * 50;
+        // The base is fixed to the meadow floor. Grass layers sit in front of
+        // the roots, so the stem looks like it grows out of the garden itself.
+        gardenPlant.style.setProperty("--wish-left", `${left.toFixed(1)}%`);
+        gardenPlant.style.setProperty("--wish-bottom", "0px");
+        lilyMeadow.appendChild(gardenPlant);
+        void gardenPlant.offsetWidth;
+        gardenPlant.classList.add("is-animating");
+
+        wishInput.value = "";
+        const animationDuration = reduceMotion ? 450 : 4550;
+        wishPlantTimer = window.setTimeout(() => {
+          wishInput.disabled = false;
           plantWishButton.disabled = false;
           plantWishButton.innerHTML = 'Plant my wish <span aria-hidden="true">✿</span>';
-        }, 1800);
+          wishOpenButton.disabled = false;
+          wishIsPlanting = false;
+          showWishGardenToast("Your wish has been planted in the garden. May it bloom beautifully. ♡");
+          showerLilies(null);
+        }, animationDuration);
       }
 
-      plantWishButton.addEventListener("click", plantWish);
+      plantWishButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        plantWish();
+      });
       wishInput.addEventListener("keydown", (event) => {
         if (event.key === "Enter" && !event.isComposing) {
           // Enter only dismisses the on-screen keyboard. It never plants a wish.
